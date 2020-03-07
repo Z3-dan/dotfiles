@@ -1,0 +1,20 @@
+#!/bin/bash
+
+#
+# ~/.startup
+#
+
+# Start dwmstatus
+dwmstatus &
+
+# Set the wallpaper
+feh --bg-scale ~/Pictures/Wallpaper.png
+
+# Start picom composite manager
+picom -c &
+
+# Make xautolock suspend the computer if idle for more than 60min
+pidof -s xautolock >& /dev/null
+if [ $? -ne 0 ]; then
+  xautolock -time 60 -locker "systemctl suspend" &
+fi
